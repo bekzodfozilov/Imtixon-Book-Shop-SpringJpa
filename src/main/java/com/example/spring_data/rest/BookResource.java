@@ -38,7 +38,7 @@ public class BookResource {
         return bookService.insert(bookDto);
     }
 
-    @PostMapping("/insert-all")
+    @PostMapping("/book-all")
     public ResponseDto<BookDto> inserAll(@RequestBody BookDto bookDto) {
         return bookService.insertAll(bookDto);
     }

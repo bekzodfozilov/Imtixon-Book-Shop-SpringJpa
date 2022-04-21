@@ -13,17 +13,17 @@ public class UserResoure {
 
     private final Userservice userservice;
 
-    @GetMapping("/user-get")
+    @GetMapping("/user")
     public ResponseDto<List<UserDto>> getUser(){
         return userservice.getUser();
     }
 
-    @PostMapping("user-get-id")
+    @PostMapping("uses")
     public ResponseDto<UserDto> getById(@RequestParam Integer id){
         return userservice.getById(id);
     }
 
-    @PutMapping("/user-update-password")
+    @PutMapping("/user")
     public ResponseDto<UserDto> updateId(@RequestParam Integer id , @RequestParam String password){
         return userservice.updateId(id,password);
     }
@@ -31,7 +31,7 @@ public class UserResoure {
     public ResponseDto<UserDto> deleteId(@RequestParam Integer id){
         return userservice.delete(id);
     }
-    @PostMapping("/add user")
+    @PostMapping("/ user")
     public ResponseDto<UserDto> addUser(@RequestBody UserDto userDto){
         return userservice.addUser(userDto);
     }
