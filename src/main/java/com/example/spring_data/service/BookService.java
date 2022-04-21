@@ -53,10 +53,11 @@ public class BookService {
             AuthorDao authorDao = authorRepository.getById(bookDao.get().getId());
             PublisherDao publisherDao = publisherRepository.getById(bookDao.get().getPublisher_id());
             if(!bookDao.isEmpty()){
-                return new ResponseDto<>(false,-1,"id topilmadi",null);
+                BookDto bookDto = BookMapping.toDto(bookDao.get(), AuthorMapping.toDto(authorDao), PublisherMapping.toDto(publisherDao));
+                return new ResponseDto<>(true, 0, "ok", bookDto);
+
             }
-            BookDto bookDto = BookMapping.toDto(bookDao.get(), AuthorMapping.toDto(authorDao), PublisherMapping.toDto(publisherDao));
-            return new ResponseDto<>(true, 0, "ok", bookDto);
+            return new ResponseDto<>(false,-1,"id topilmadi",null);
         }
         return new ResponseDto<>(false, -1, "Id null xolatida", null);
     }

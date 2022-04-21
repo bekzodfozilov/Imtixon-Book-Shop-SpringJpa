@@ -1,22 +1,22 @@
 package com.example.spring_data.mapping;
 
-import com.example.spring_data.Dao.UserDao;
+import com.example.spring_data.Dao.User;
 import com.example.spring_data.Dto.UserDto;
 
 public class UserMapping {
-    public static UserDto toDto(UserDao userDao){
+    public static UserDto toDto(User user){
         return new UserDto(
-                userDao.getId(),
-                userDao.getFirstname(),
-                userDao.getLastname(),
-                userDao.getAccount(),
-                userDao.getPhonenumber(),
-                userDao.getPassword(),
-                userDao.getUsername()
+                user.getId(),
+                user.getFirstname(),
+                user.getLastname(),
+                user.getAccount(),
+                user.getPhonenumber(),
+                user.getPassword(),
+                user.getUsername()
         );
     }
-    public static UserDao toDao(UserDto userDto){
-        return new UserDao(
+    public static User toDao(UserDto userDto){
+        return new User(
                userDto.getId(),
                 userDto.getFirstname(),
                userDto.getLastname(),

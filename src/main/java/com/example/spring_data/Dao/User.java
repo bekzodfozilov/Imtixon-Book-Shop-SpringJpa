@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Data
 @NoArgsConstructor
-public class UserDao {
+public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -33,7 +33,7 @@ public class UserDao {
     @Column(name = "username")
     private String username;
 
-    public UserDao(Integer id, String firstname, String lastname, Integer account, String phonenumber, String password, String username) {
+    public User(Integer id, String firstname, String lastname, Integer account, String phonenumber, String password, String username) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
