@@ -14,27 +14,27 @@ import java.util.List;
 public class PublisherResource {
     private final PublisherService publisherService;
 
-    @GetMapping("/publisher")
+    @GetMapping("/get-publisher")
     public ResponseDto<List<PublisherDto>> getPublisher(){
         return publisherService.getPublisher();
     }
 
-    @PostMapping("/publihser")
+    @PostMapping("/get-publihser-id")
     public ResponseDto<PublisherDto> getPublisherId(@RequestParam Integer id){
         return publisherService.getPublihserId(id);
     }
 
-    @PostMapping("/publisher")
+    @PostMapping("/add-publisher")
     public ResponseDto<PublisherDto> addPublisher(@RequestBody PublisherDto publisherDto){
         return publisherService.addPublihser(publisherDto);
     }
 
-    @DeleteMapping("/publisher")
+    @DeleteMapping("/delete-publisher-id")
     public ResponseDto<PublisherDto> deletePublisher(@RequestParam Integer id){
         return publisherService.deletePublihser(id);
     }
 
-    @PutMapping("/publihser")
+    @PutMapping("/update-publihser-id")
     public ResponseDto<PublisherDto> updatePublisher(@RequestParam Integer id){
         return publisherService.updatePublisher(id);
     }

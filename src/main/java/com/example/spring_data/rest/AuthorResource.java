@@ -14,27 +14,27 @@ public class AuthorResource {
 
     private final AuthorService authorService;
 
-    @GetMapping("/author")
+    @GetMapping("/get")
     public ResponseDto<List<AuthorDto>> getAuthor(){
         return authorService.getAuthor();
     }
 
-    @PostMapping("/author")
+    @PostMapping("/author-get-id")
     public ResponseDto<AuthorDto> getByAuthorId(@RequestParam Integer id){
         return authorService.getByauthorId(id);
     }
 
-    @PostMapping("/author")
+    @PostMapping("/author-add")
     public ResponseDto<AuthorDto> addAuthor(@RequestBody AuthorDto authorDto){
         return authorService.addaythor(authorDto);
     }
 
-    @DeleteMapping("/author")
+    @DeleteMapping("/delete-author-id")
     public ResponseDto<AuthorDto> deleteAuthor(@RequestParam Integer id){
         return authorService.deletaAuthor(id);
     }
 
-    @PutMapping("/author")
+    @PutMapping("/update-author-id")
     public ResponseDto<AuthorDto> updateAuthor(@RequestParam Integer id){
         return authorService.updateAuthor(id);
     }
