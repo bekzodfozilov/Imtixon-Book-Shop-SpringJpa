@@ -41,11 +41,11 @@ public class Userservice {
     }
 
     public ResponseDto<UserDto> updateId(Integer id, String password) {
-     User user = userRepository.getById(id);
-        if(user.getId() != null){
-            user.setPassword(password);
-            userRepository.save(user);
-            return new ResponseDto<>(true,0,"update",UserMapping.toDto(user));
+     Optional<User> user = userRepository.findById(id);
+        if(!user.isEmpty()){
+            user.get().setPassword(password);
+            userRepository.save(user.get());
+            return new ResponseDto<>(true,0,"update",UserMapping.toDto(user.get()));
         }
         return new ResponseDto<>(false,-1,"id topilmadi",null);
     }
