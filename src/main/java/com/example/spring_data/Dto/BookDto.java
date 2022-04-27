@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -30,5 +31,23 @@ public class BookDto{
     private PublisherDto publisherDto;
 
 
+    public BookDto(Integer id, String nameuz, BigDecimal cost, String published_date, Integer page_count, String genre, PublisherDto publisherDto) {
+        this.id = id;
+        this.nameuz = nameuz;
+        this.cost = cost;
+        this.published_date = published_date;
+        this.page_count = page_count;
+        this.genre = genre;
+        this.publisherDto = publisherDto;
+    }
 
+    public BookDto(Integer id, String nameuz, BigDecimal cost, String published_date, Integer page_count, AuthorDto authorDto, String genre) {
+        this.id = id;
+        this.nameuz = nameuz;
+        this.cost = cost;
+        this.published_date = published_date;
+        this.page_count = page_count;
+        this.authorDto = authorDto;
+        this.genre = genre;
+    }
 }

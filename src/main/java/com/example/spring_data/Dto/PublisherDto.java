@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,12 +15,13 @@ public class PublisherDto {
 
     private String name;
 
-    private Integer adres_id;
+    private AddressDto addressDto;
 
-    public PublisherDto(String name, Integer adres_id) {
+   private List<BookDto> bookDtos;
+
+    public PublisherDto(Integer id, String name, AddressDto addressDto) {
+        this.id = id;
         this.name = name;
-        this.adres_id = adres_id;
+        this.addressDto = addressDto;
     }
-
-
 }

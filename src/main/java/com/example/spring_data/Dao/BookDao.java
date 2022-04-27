@@ -28,23 +28,28 @@ public class BookDao {
     @Column(name = "page_count")
     private Integer page_count;
 
-    @Column(name = "author_id")
-    private Integer author_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "auhtor_id",referencedColumnName = "id")
+    private AuthorDao authorDao;
 
     @Column(name = "genre")
     private String genre;
 
-    @Column(name = "publisher_id")
-    private Integer publisher_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "publisher_id",referencedColumnName = "id")
+    private PublisherDao publisherDao;
 
-    public BookDao(Integer id, String nameUZ,  BigDecimal cost, String publishedDate, Integer page_count, Integer author_id, String genre, Integer publisher_id) {
+    public BookDao(Integer id, String nameUZ, BigDecimal cost, String publishedDate, Integer page_count, AuthorDao authorDao, String genre, PublisherDao publisherDao) {
         this.id = id;
         this.nameUZ = nameUZ;
         this.cost = cost;
         this.publishedDate = publishedDate;
         this.page_count = page_count;
-        this.author_id = author_id;
+        this.authorDao = authorDao;
         this.genre = genre;
-        this.publisher_id = publisher_id;
+        this.publisherDao = publisherDao;
     }
+
+
 }

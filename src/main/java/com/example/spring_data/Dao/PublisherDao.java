@@ -2,8 +2,10 @@ package com.example.spring_data.Dao;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "publisher")
@@ -18,12 +20,17 @@ public class PublisherDao {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "adres_id")
-    private Integer adres_id;
+   @OneToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "adres_id",referencedColumnName = "id")
+    private AddresDao addresDao;
 
-    public PublisherDao(String name, Integer adres_id) {
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "publisherDao")
+    private List<BookDao> bookDaos;
+
+    public PublisherDao(Integer id, String name, AddresDao addresDao, List<BookDao> bookDaos) {
         this.id = id;
         this.name = name;
-        this.adres_id = adres_id;
+        this.addresDao = addresDao;
+        this.bookDaos = bookDaos;
     }
 }

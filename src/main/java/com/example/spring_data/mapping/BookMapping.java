@@ -5,10 +5,10 @@ import com.example.spring_data.Dto.AuthorDto;
 import com.example.spring_data.Dto.BookDto;
 import com.example.spring_data.Dto.PublisherDto;
 
-
 public class BookMapping {
-
-    public static BookDto toDto(BookDao bookDao , AuthorDto authorDto , PublisherDto publisherDto) {
+    public static BookDto toDto(BookDao bookDao){
+        AuthorDto authorDto = AuthorMapping.toDto(bookDao.getAuthorDao());
+        PublisherDto publisherDto = PublisherMapping.toDto(bookDao.getPublisherDao());
         return new BookDto(
                 bookDao.getId(),
                 bookDao.getNameUZ(),
@@ -18,20 +18,31 @@ public class BookMapping {
                 authorDto,
                 bookDao.getGenre(),
                 publisherDto
-
         );
     }
-
-    public static BookDao toDao(BookDto bookDto) {
-        return new BookDao(
-                bookDto.getId(),
-                bookDto.getNameuz(),
-                bookDto.getCost(),
-                bookDto.getPublished_date(),
-                bookDto.getPage_count(),
-                bookDto.getAuthorDto().getId(),
-                bookDto.getGenre(),
-                bookDto.getPublisherDto().getId()
-                );
+    public static BookDto toDtos(BookDao bookDao){
+        PublisherDto publisherDto = PublisherMapping.toDto(bookDao.getPublisherDao());
+        return new BookDto(
+                bookDao.getId(),
+                bookDao.getNameUZ(),
+                bookDao.getCost(),
+                bookDao.getPublishedDate(),
+                bookDao.getPage_count(),
+                bookDao.getGenre(),
+                publisherDto
+        );
     }
+   public static BookDto toDtoss(BookDao bookDao){
+      AuthorDto authorDto = AuthorMapping.toDto(bookDao.getAuthorDao());
+       return new BookDto(
+               bookDao.getId(),
+               bookDao.getNameUZ(),
+               bookDao.getCost(),
+               bookDao.getPublishedDate(),
+               bookDao.getPage_count(),
+               authorDto,
+               bookDao.getGenre()
+
+       );
+   }
 }

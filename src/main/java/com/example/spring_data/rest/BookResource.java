@@ -15,35 +15,8 @@ public class BookResource {
 
     private final BookService bookService;
 
-    @GetMapping("/books")
-//    public ResponseDto<List<BookDto>>getAll(@RequestParam Integer size, @RequestParam Integer page){
-//        return bookService.getAllBooks(size,page);
-//}
-    public ResponseDto<List<BookDto>> getAll() {
-        return bookService.getAllBooks();
-    }
-
-    @PostMapping("/book")
-    public ResponseDto<BookDto> getById(@RequestParam Integer id) {
-        return bookService.getById(id);
-    }
-
-    @DeleteMapping("delede-id")
-    public ResponseDto<BookDto> delete(@RequestParam Integer id) {
-        return bookService.deledeId(id);
-    }
-
-    @PostMapping("/insert")
-    public ResponseDto<BookDto> insert(@RequestBody BookDto bookDto) {
-        return bookService.insert(bookDto);
-    }
-
-    @PostMapping("/insert-all")
-    public ResponseDto<BookDto> inserAll(@RequestBody BookDto bookDto) {
-        return bookService.insertAll(bookDto);
-    }
-    @PutMapping("/update")
-    public ResponseDto<BookDto> update(@RequestBody BookDto bookDto){
-        return bookService.update(bookDto);
+    @GetMapping("/get-all")
+    public ResponseDto<Page<BookDto>> getAllBooks(@RequestParam Integer size ,@RequestParam Integer page){
+       return bookService.getAllBooks(size,page);
     }
 }

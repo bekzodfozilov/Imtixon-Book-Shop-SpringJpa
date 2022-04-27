@@ -6,56 +6,28 @@ import com.example.spring_data.Dto.ResponseDto;
 import com.example.spring_data.Repository.PublisherRepository;
 import com.example.spring_data.mapping.PublisherMapping;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PublisherService {
 
     private final PublisherRepository publisherRepository;
-    public ResponseDto<List<PublisherDto>> getPublisher() {
-        List<PublisherDao> publisherDaos = publisherRepository.findAll();
-        List<PublisherDto> publisherDtos = new ArrayList<>();
-        for (PublisherDao publisherDao : publisherDaos){
-             publisherDtos.add(PublisherMapping.toDto(publisherDao));
-        }
-        return new ResponseDto<>(true,0,"ok",publisherDtos);
-    }
 
-    public ResponseDto<PublisherDto> getPublihserId(Integer id) {
-        Optional<PublisherDao> publisherDao = publisherRepository.findById(id);
-        if(!publisherDao.isEmpty()){
-            return new ResponseDto<>(true,0,"ok",PublisherMapping.toDto(publisherDao.get()));
-        }
-        return new ResponseDto<>(false,-1,"Id topilmadi",null);
-    }
+    public ResponseDto<Page<PublisherDto>> getAllPublisher(Integer size, Integer page) {
+        PageRequest pageRequest = PageRequest.of(page,size);
+        Page<PublisherDao> publisherDaos = publisherRepository.findAll(pageRequest);
+        List<PublisherDto> publisherDtos = publisherDaos.stream()
+                .map(PublisherMapping::toDtos).collect(Collectors.toList());
 
-    public ResponseDto<PublisherDto> addPublihser(PublisherDto publisherDto) {
-        PublisherDao publisherDao = PublisherMapping.toDao(publisherDto);
-        publisherRepository.save(publisherDao);
-        return new ResponseDto<>(true,0,"ok",publisherDto);
-
-    }
-
-    public ResponseDto<PublisherDto> deletePublihser(Integer id) {
-       Optional<PublisherDao> publisherDao = publisherRepository.findById(id);
-       if(!publisherDao.isEmpty()){
-           publisherRepository.delete(publisherDao.get());
-           return new ResponseDto<>(true,0,"ok",PublisherMapping.toDto(publisherDao.get()));
-       }
-       return new ResponseDto<>(false,-1,"Id topilmadi",PublisherMapping.toDto(publisherDao.get()));
-    }
-
-    public ResponseDto<PublisherDto> updatePublisher(Integer id) {
-        Optional<PublisherDao> publisherDao = publisherRepository.findById(id);
-        if(!publisherDao.isEmpty()){
-            publisherRepository.delete(publisherDao.get());
-            return new ResponseDto<>(true,0,"Uptade",PublisherMapping.toDto(publisherDao.get()));
-        }
-        return new ResponseDto<>(false,-1,"xatolik",PublisherMapping.toDto(publisherDao.get()));
+        return new ResponseDto<>(true,0,"ok",new PageImpl<>(publisherDtos,publisherDaos.getPageable(),publisherDaos.getTotalElements()));
     }
 }
